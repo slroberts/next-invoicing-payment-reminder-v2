@@ -1,4 +1,4 @@
-import { UserProps } from './interfaces/interfaces';
+import { ClientProps, InvoiceProps, UserProps } from './interfaces/interfaces';
 
 const fetcher = async <T>({
   url,
@@ -45,5 +45,31 @@ export const login = async (user: UserProps): Promise<any> => {
     method: 'POST',
     body: user,
     json: false,
+  });
+};
+
+export const createNewClient = async (client: ClientProps): Promise<any> => {
+  return fetcher<ClientProps>({
+    url: '/api/client/addClient',
+    method: 'POST',
+    body: client,
+    json: true,
+  });
+};
+
+export const deleteClient = async (clientId: string): Promise<any> => {
+  return fetcher<void>({
+    url: `/api/client/${clientId}`,
+    method: 'DELETE',
+    json: true,
+  });
+};
+
+export const createNewInvoice = async (invoice: InvoiceProps): Promise<any> => {
+  return fetcher<InvoiceProps>({
+    url: '/api/invoice/addInvoice',
+    method: 'POST',
+    body: invoice,
+    json: true,
   });
 };
