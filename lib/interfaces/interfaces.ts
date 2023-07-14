@@ -1,4 +1,4 @@
-import { User } from '@prisma/client';
+import { User, Client, Invoice } from '@prisma/client';
 
 export interface ButtonProps {
   disabled?: boolean;
@@ -14,6 +14,35 @@ export interface CardProps {
   children: React.ReactNode;
 }
 
+export interface ClientProps {
+  client?: Client;
+  id?: string;
+  name?: string;
+  address?: string;
+  email?: string;
+  phoneNumber?: string;
+  label?: string;
+  modalRef?: React.RefObject<HTMLDivElement>;
+}
+
+export interface FormProps {
+  label: string;
+  fields: {
+    name: string;
+    label: string;
+    type: string;
+    placeholder: string;
+    value: string;
+    setValue: (value: string) => void;
+  }[];
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
+  isLoading: boolean;
+  error: string;
+  onClose: () => void;
+  isOpen: boolean;
+  modalRef?: any;
+}
+
 export interface InputProps {
   name: string;
   required?: boolean;
@@ -22,6 +51,19 @@ export interface InputProps {
   onChange: any;
   type: string;
   className: string;
+}
+
+export interface InvoiceProps {
+  invoices?: Invoice[];
+  due?: any;
+  clientId?: string;
+}
+
+export interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+  modalRef?: any;
 }
 
 export interface UserProps {
