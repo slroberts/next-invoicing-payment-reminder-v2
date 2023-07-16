@@ -1,4 +1,10 @@
 import { User, Client, Invoice } from '@prisma/client';
+import { MouseEvent } from 'react';
+
+export interface BackButtonProps {
+  onClick?: (event: MouseEvent<HTMLDivElement>) => void;
+  label: string;
+}
 
 export interface ButtonProps {
   disabled?: boolean;
@@ -64,6 +70,10 @@ export interface ModalProps {
   onClose: () => void;
   children: React.ReactNode;
   modalRef?: any;
+}
+
+export interface Params {
+  id?: string;
 }
 
 export interface UserProps {
