@@ -1,4 +1,9 @@
-import { ClientProps, InvoiceProps, UserProps } from './interfaces/interfaces';
+import {
+  ClientProps,
+  InvoiceProps,
+  ItemProps,
+  UserProps,
+} from './interfaces/interfaces';
 
 const fetcher = async <T>({
   url,
@@ -70,6 +75,15 @@ export const createNewInvoice = async (invoice: InvoiceProps): Promise<any> => {
     url: '/api/invoice/addInvoice',
     method: 'POST',
     body: invoice,
+    json: true,
+  });
+};
+
+export const createNewItem = async (item: ItemProps): Promise<any> => {
+  return fetcher<ItemProps>({
+    url: '/api/item/addItem',
+    method: 'POST',
+    body: item,
     json: true,
   });
 };

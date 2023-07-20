@@ -1,4 +1,4 @@
-import { User, Client, Invoice } from '@prisma/client';
+import { User, Client, Invoice, Item } from '@prisma/client';
 import { MouseEvent } from 'react';
 
 export interface BackButtonProps {
@@ -65,6 +65,16 @@ export interface InvoiceProps {
   clientId?: string;
 }
 
+export interface ItemProps {
+  id?: string;
+  name?: string;
+  price?: number;
+  hours?: number;
+  invoiceId?: string;
+  label?: string;
+  invoice?: (Invoice & { items: Item[] }) | null;
+}
+
 export interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -74,6 +84,17 @@ export interface ModalProps {
 
 export interface Params {
   id?: string;
+}
+
+export interface SendButtonProps {
+  onClick?: (event: MouseEvent<HTMLDivElement>) => void;
+  user: User;
+  client: Client;
+  invoice: Invoice;
+  items: Item[];
+  subTotal: number;
+  salesTax: number;
+  total: string;
 }
 
 export interface UserProps {
