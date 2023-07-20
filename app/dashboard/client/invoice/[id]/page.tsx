@@ -8,6 +8,7 @@ import { getUserFromCookie } from '@/lib/auth';
 import { db } from '@/lib/db';
 import capitalizeWords from '@/lib/utils';
 import { cookies } from 'next/headers';
+import SendInvoiceButton from '@/components/SendInvoiceButton';
 import { ItemProps, Params } from '@/lib/interfaces/interfaces';
 
 const getData = async (id?: string) => {
@@ -120,6 +121,21 @@ export default async function InvoicePage({ params }: { params: Params }) {
           <div className='px-6 col-start-4 md:col-start-10'>${total}</div>
         </div>
       </div>
+      {invoice?.status !== 'SENT' && items?.length !== 0 && (
+        <div className='mt-10 flex justify-end'>
+          {user && client && invoice && items && (
+            <SendInvoiceButton
+              user={user}
+              client={client}
+              invoice={invoice}
+              items={items}
+              subTotal={subTotal}
+              salesTax={salesTax}
+              total={total}
+            />
+          )}
+        </div>
+      )}
     </div>
   );
 }
