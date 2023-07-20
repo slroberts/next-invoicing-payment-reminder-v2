@@ -1,5 +1,6 @@
 import BackButton from '@/components/BackButton';
 import ClientInfo from '@/components/ClientInfo';
+import DeleteButton from '@/components/DeleteButton';
 import InvoiceDetails from '@/components/InvoiceDetails';
 import NewItemForm from '@/components/NewItemForm';
 import UserGreeting from '@/components/UserGreeting';
@@ -62,6 +63,9 @@ export default async function InvoicePage({ params }: { params: Params }) {
             </div>
             <div className='md:col-span-2 px-6 py-4'>
               ${(item.price! * item.hours!).toFixed(2)}
+            </div>
+            <div className='px-6 py-4 ml-[5vw] sm:ml-[7vw] md:ml-[-1vw] lg:ml-[1vw]'>
+              {invoice?.status !== 'SENT' ? <DeleteButton item={item} /> : null}
             </div>
           </div>
         ))}

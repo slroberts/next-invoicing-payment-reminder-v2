@@ -1,6 +1,7 @@
 import { InvoiceProps } from '@/lib/interfaces/interfaces';
 import Link from 'next/link';
 import { FC } from 'react';
+import DeleteButton from './DeleteButton';
 
 const InvoiceTable: FC<InvoiceProps> = ({ invoices = [] }) => {
   if (!invoices) {
@@ -20,6 +21,9 @@ const InvoiceTable: FC<InvoiceProps> = ({ invoices = [] }) => {
           <div className='px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider'>
             STATUS
           </div>
+        </div>
+        <div className='px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider'>
+          Delete
         </div>
       </div>
       <div className='bg-white divide-y divide-slate-200'>
@@ -52,6 +56,9 @@ const InvoiceTable: FC<InvoiceProps> = ({ invoices = [] }) => {
                 {invoice.status === 'SENT' ? 'Sent' : 'Not Sent'}
               </div>
             </Link>
+            <div className='px-6 py-2 sm:mr-4'>
+              <DeleteButton invoice={invoice} />
+            </div>
           </div>
         ))}
       </div>

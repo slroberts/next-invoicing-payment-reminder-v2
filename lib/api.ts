@@ -79,11 +79,27 @@ export const createNewInvoice = async (invoice: InvoiceProps): Promise<any> => {
   });
 };
 
+export const deleteInvoice = async (invoiceId: string): Promise<any> => {
+  return fetcher<void>({
+    url: `/api/invoice/${invoiceId}`,
+    method: 'DELETE',
+    json: true,
+  });
+};
+
 export const createNewItem = async (item: ItemProps): Promise<any> => {
   return fetcher<ItemProps>({
     url: '/api/item/addItem',
     method: 'POST',
     body: item,
+    json: true,
+  });
+};
+
+export const deleteItem = async (itemId: string): Promise<any> => {
+  return fetcher<void>({
+    url: `/api/item/${itemId}`,
+    method: 'DELETE',
     json: true,
   });
 };
