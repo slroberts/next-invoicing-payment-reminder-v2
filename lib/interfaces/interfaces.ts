@@ -29,6 +29,10 @@ export interface ClientProps {
   phoneNumber?: string;
   label?: string;
   modalRef?: React.RefObject<HTMLDivElement>;
+  createdAt?: Date;
+  updatedAt?: Date;
+  ownerId?: string;
+  deleted?: boolean;
 }
 
 export interface DeleteButtonProps {

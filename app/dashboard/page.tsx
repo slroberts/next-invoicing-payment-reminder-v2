@@ -40,7 +40,7 @@ export default async function Page() {
         </div>
         {clients.length > 0 ? (
           <div className='grid md:grid-cols-3 col-span-5 gap-6 overflow-y-auto h-[28rem] md:h-full'>
-            {clients.map((client) => (
+            {clients.map((client: any) => (
               <div key={client.id}>
                 <div className='float-right mt-4 mr-3'>
                   <MoreDropDown client={client} />
