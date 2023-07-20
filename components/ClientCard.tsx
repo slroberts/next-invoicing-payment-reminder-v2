@@ -2,15 +2,13 @@ import { FC } from 'react';
 import { Prisma } from '@prisma/client';
 import InvoicesCountAndSentStatus from './InvoicesCountAndSentStatus';
 
-const clients = Prisma.validator<Prisma.ClientArgs>()({
+type ClientWithInvoices = Prisma.ClientGetPayload<{
   include: {
-    invoices: true,
-  },
-});
+    invoices: true;
+  };
+}>;
 
-type Clients = Prisma.ClientGetPayload<typeof clients>;
-
-const ClientCard: FC<{ client: Clients }> = ({ client }) => {
+const ClientCard: FC<{ client: ClientWithInvoices }> = ({ client }) => {
   const { name, address, email, phoneNumber } = client;
 
   return (
