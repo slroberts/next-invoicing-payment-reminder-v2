@@ -41,4 +41,14 @@ describe('Client Page Actions', () => {
       cy.url().should('include', '/dashboard/client/invoice');
     });
   });
+
+  it('should delete an invoice', () => {
+    login();
+
+    cy.get('a').contains('Test Client').first().click();
+
+    cy.url().should('include', '/dashboard/client');
+
+    cy.get('#delete-button').click();
+  });
 });
