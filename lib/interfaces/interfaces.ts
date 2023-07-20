@@ -1,4 +1,4 @@
-import { User, Client, Invoice, Item } from '@prisma/client';
+import { Client, Invoice, Item, User } from '@prisma/client';
 import { MouseEvent } from 'react';
 
 export interface BackButtonProps {
@@ -29,6 +29,12 @@ export interface ClientProps {
   phoneNumber?: string;
   label?: string;
   modalRef?: React.RefObject<HTMLDivElement>;
+}
+
+export interface DeleteButtonProps {
+  onClick?: (event: MouseEvent<HTMLDivElement>) => void;
+  item?: { id?: string };
+  invoice?: { id: string };
 }
 
 export interface FormProps {
