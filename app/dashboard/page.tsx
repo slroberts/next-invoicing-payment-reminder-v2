@@ -2,7 +2,6 @@ import ClientCard from '@/components/ClientCard';
 import MoreDropDown from '@/components/MoreDropDown';
 import NewClientForm from '@/components/NewClientForm';
 import UserGreeting from '@/components/UserGreeting';
-import { delay } from '@/lib/async';
 import { getUserFromCookie } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { cookies } from 'next/headers';
@@ -11,7 +10,6 @@ import Image from 'next/image';
 import receipt from '@/assets/images/undraw_fill_in_mie5.svg';
 
 const getData = async () => {
-  await delay(1000);
   const user = await getUserFromCookie(cookies() as any);
   const clients = await db.client.findMany({
     where: {

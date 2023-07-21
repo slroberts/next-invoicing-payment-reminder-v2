@@ -1,11 +1,9 @@
-import { delay } from '@/lib/async';
 import { getUserFromCookie } from '@/lib/auth';
 import { cookies } from 'next/headers';
 import { User } from 'react-feather';
 import LogoutButton from './LogoutButton';
 
 const getData = async () => {
-  await delay(1000);
   const user = await getUserFromCookie(cookies() as any);
 
   return user;
