@@ -109,8 +109,11 @@ export interface SendButtonProps {
 
 export interface UserProps {
   user?: User;
-  email: string;
-  password: string;
-  firstName?: string;
-  lastName?: string;
+  id?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  email?: string;
+  password?: string;
+  firstName?: string | null;
+  lastName?: string | null;
 }
