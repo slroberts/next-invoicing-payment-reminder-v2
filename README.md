@@ -2,6 +2,8 @@
 
 A web application for invoicing and payment reminders built with Next.js.
 
+![Invoicing and Payment App Screenshot](https://shomariroberts.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fd33jlrbsef5n%2F1P3HxNekJcuIeTQq0Dguu0%2F994845874394540831b2f7171b19ecba%2Fnext-invoicing-payment-reminder-v2.vercel.app_.png&w=3840&q=75)
+
 ## Installation
 
 1. Clone the repository.
