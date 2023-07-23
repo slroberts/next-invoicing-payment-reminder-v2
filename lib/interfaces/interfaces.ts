@@ -4,6 +4,7 @@ import { MouseEvent } from 'react';
 export interface BackButtonProps {
   onClick?: (event: MouseEvent<HTMLDivElement>) => void;
   label: string;
+  url: string;
 }
 
 export interface ButtonProps {

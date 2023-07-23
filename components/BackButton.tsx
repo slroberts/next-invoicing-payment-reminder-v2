@@ -4,11 +4,11 @@ import { BackButtonProps } from '@/lib/interfaces/interfaces';
 import { ArrowLeft } from 'react-feather';
 import { useRouter } from 'next/navigation';
 
-const BackButton: FC<BackButtonProps> = ({ label }) => {
+const BackButton: FC<BackButtonProps> = ({ label, url }) => {
   const router = useRouter();
 
   function handleBackClick() {
-    router.back();
+    router.replace(url);
   }
 
   return (

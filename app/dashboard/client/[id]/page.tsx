@@ -23,7 +23,7 @@ export default async function ClientPage({ params }: { params: Params }) {
   return (
     <div>
       <div className='flex gap-6 flex-col'>
-        <BackButton label='Back' />
+        <BackButton label='Back to Dashboard' url='/dashboard' />
 
         <hr />
 

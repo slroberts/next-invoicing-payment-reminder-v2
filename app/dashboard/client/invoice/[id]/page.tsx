@@ -76,7 +76,10 @@ export default async function InvoicePage({ params }: { params: Params }) {
   return (
     <div>
       <div className='flex gap-6 flex-col'>
-        <BackButton label='Back' />
+        <BackButton
+          label='Back to Client'
+          url={`/dashboard/client/${client?.id}`}
+        />
         <hr />
         <div className='font-semibold -mb-2 text-blue-600'>Billed To</div>
         {client && <ClientInfo client={client} />}
