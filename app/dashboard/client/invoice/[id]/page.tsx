@@ -3,7 +3,6 @@ import ClientInfo from '@/components/ClientInfo';
 import DeleteButton from '@/components/DeleteButton';
 import InvoiceDetails from '@/components/InvoiceDetails';
 import NewItemForm from '@/components/NewItemForm';
-import UserGreeting from '@/components/UserGreeting';
 import { getUserFromCookie } from '@/lib/auth';
 import { db } from '@/lib/db';
 import capitalizeWords from '@/lib/utils';
@@ -76,7 +75,6 @@ export default async function InvoicePage({ params }: { params: Params }) {
 
   return (
     <div>
-      <UserGreeting />
       <div className='flex gap-6 flex-col'>
         <BackButton label='Back' />
         <hr />

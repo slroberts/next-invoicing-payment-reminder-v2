@@ -3,7 +3,6 @@ import ClientInfo from '@/components/ClientInfo';
 import InvoicesCountAndSentStatus from '@/components/InvoicesCountAndSentStatus';
 import InvoiceTable from '@/components/InvoiceTable';
 import NewInvoiceForm from '@/components/NewInvoiceForm';
-import UserGreeting from '@/components/UserGreeting';
 import { db } from '@/lib/db';
 import { Params } from '@/lib/interfaces/interfaces';
 
@@ -23,8 +22,6 @@ export default async function ClientPage({ params }: { params: Params }) {
 
   return (
     <div>
-      <UserGreeting />
-
       <div className='flex gap-6 flex-col'>
         <BackButton label='Back' />
 

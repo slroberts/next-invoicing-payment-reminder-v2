@@ -1,7 +1,6 @@
 import ClientCard from '@/components/ClientCard';
 import MoreDropDown from '@/components/MoreDropDown';
 import NewClientForm from '@/components/NewClientForm';
-import UserGreeting from '@/components/UserGreeting';
 import { getUserFromCookie } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { cookies } from 'next/headers';
@@ -28,7 +27,6 @@ export default async function Page() {
 
   return (
     <div>
-      <UserGreeting />
       <div className='grid lg:grid-flow-col-dense gap-8 py-8'>
         <div className='col-auto'>
           <h3 className='text-xl font-medium mb-6'>
