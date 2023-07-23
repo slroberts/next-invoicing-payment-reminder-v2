@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import Card from './Card';
 import Button from './Button';
 import Input from './Input';
+import { useAuth } from '@/hooks/useAuth';
 
 const registerContent = {
   linkUrl: '/login',
@@ -30,6 +31,8 @@ export default function AuthForm({ mode }: { mode: 'register' | 'login' }) {
   const [error, setError] = useState('');
 
   const router = useRouter();
+  const { setIsUserLoggedIn } = useAuth();
+
   const handleSubmit = useCallback(
     async (e: { preventDefault: () => void }) => {
       e.preventDefault();
@@ -40,15 +43,16 @@ export default function AuthForm({ mode }: { mode: 'register' | 'login' }) {
         } else {
           await login(formState);
         }
-
+        localStorage.setItem('user', JSON.stringify(formState));
         router.replace('/dashboard');
+        setIsUserLoggedIn(true);
       } catch (e) {
         setError(`Could not ${mode}`);
       } finally {
         setFormState({ ...initial });
       }
     },
-    [formState, mode, router]
+    [formState, mode, router, setIsUserLoggedIn]
   );
 
   const content = mode === 'register' ? registerContent : signinContent;
@@ -117,7 +121,7 @@ export default function AuthForm({ mode }: { mode: 'register' | 'login' }) {
               Password
             </div>
             <Input
-              name="password"
+              name='password'
               required
               value={formState.password}
               type='password'

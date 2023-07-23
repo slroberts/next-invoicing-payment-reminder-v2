@@ -2,9 +2,11 @@
 import { useRouter } from 'next/navigation';
 import { FC } from 'react';
 import { LogOut } from 'react-feather';
+import { useAuth } from '@/hooks/useAuth';
 
 const LogoutButton: FC = () => {
   const router = useRouter();
+  const { setIsUserLoggedIn } = useAuth();
 
   async function logout() {
     try {
@@ -12,6 +14,8 @@ const LogoutButton: FC = () => {
         method: 'POST',
       });
       router.replace(`/login`);
+      localStorage.removeItem('user');
+      setIsUserLoggedIn(false);
     } catch (error) {
       console.error('Logout failed:', error);
     }
