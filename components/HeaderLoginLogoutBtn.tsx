@@ -15,20 +15,18 @@ const HeaderLoginLogoutBtn = ({ user }: { user: UserProps }) => {
     return null;
   }
 
-  if (!isUserLoggedIn) {
-    return (
-      <Link href='/login' className='underline text-blue-300'>
-        <LogIn />
-      </Link>
-    );
-  }
-
   return (
     <div>
-      <div className='flex w-max justify-between items-center gap-4 font-medium text-slate-400'>
-        <UserGreeting user={user} />
-        <LogoutButton />
-      </div>
+      {isUserLoggedIn ? (
+        <div className='flex w-max justify-between items-center gap-4 font-medium text-slate-400'>
+          <UserGreeting user={user} />
+          <LogoutButton />
+        </div>
+      ) : (
+        <Link href='/login' className='underline text-blue-300'>
+          <LogIn />
+        </Link>
+      )}
     </div>
   );
 };
