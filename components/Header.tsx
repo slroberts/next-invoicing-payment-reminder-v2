@@ -1,9 +1,21 @@
-const Header = () => {
+import { getUserFromCookie } from '@/lib/auth';
+import { cookies } from 'next/headers';
+import AppBrand from './AppBrand';
+import HeaderLoginLogoutBtn from './HeaderLoginLogoutBtn';
+
+const getData = async () => {
+  const user = await getUserFromCookie(cookies() as any);
+
+  return { user };
+};
+
+const Header = async () => {
+  const { user } = await getData();
+
   return (
     <header className='py-6 flex justify-between'>
-      <div className='text-blue-500 font-bold uppercase'>
-        Invoicing &amp; Payment Reminder
-      </div>
+      <AppBrand />
+      <HeaderLoginLogoutBtn user={user!} />
     </header>
   );
 };
