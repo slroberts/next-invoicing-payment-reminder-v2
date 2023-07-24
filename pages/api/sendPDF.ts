@@ -4,6 +4,8 @@ import PDFDocument from 'pdfkit';
 import sgMail from '@sendgrid/mail';
 sgMail.setApiKey(process.env.SENDGRID_API_KEY as string);
 import { db } from '@/lib/db';
+import ejs from 'ejs';
+import { resolve } from 'path';
 
 export default async function handler(
   req: { body: { data: any; content: any } },
@@ -32,7 +34,7 @@ export default async function handler(
   doc.fontSize(10);
   doc
     .text(`${data.user.firstName} ${data.user.lastName}`, 24, 36)
-    .text(`${data.client.email}`, 224, 36);
+    .text(`${data.user.email}`, 224, 36);
 
   doc.fontSize(8);
   doc.text('Billed To', 24, 72);
@@ -83,11 +85,32 @@ export default async function handler(
 
   const FROM_EMAIL = 'shomariroberts@gmail.com';
 
+  const invoiceEmailTemplate = readFileSync(
+    resolve(process.cwd(), './emails/InvoiceEmail.ejs'),
+    'utf-8'
+  );
+
+  const html = ejs.render(invoiceEmailTemplate, {
+    userName: `${data.user.firstName} ${data.user.lastName}`,
+    userEmail: data.user.email,
+    clientName: data.client.name,
+    clientAddress: data.client.address,
+    clientEmail: data.client.email,
+    clientPhoneNumber: data.client.phoneNumber,
+    invoiceId: content.invoice.id,
+    invoiceDue: content.invoice.due,
+    items: content.items,
+    subTotal: content.subTotal,
+    salesTax: content.salesTax,
+    total: content.total,
+  });
+
   const msg = {
     to: `${data.client.email}`,
     from: FROM_EMAIL,
     subject: `New Invoice - ${content.invoice.id}`,
     text: `Please find New Invoice - ${content.invoice.id} attached PDF document.`,
+    html: html,
     attachments: [
       {
         content: readFileSync(filePath).toString('base64'),
