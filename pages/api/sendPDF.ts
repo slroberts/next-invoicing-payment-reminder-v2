@@ -50,7 +50,7 @@ export default async function handler(
   doc.fontSize(10);
   doc
     .text(`Invoice Id: ${content.invoice.id}`, 24, 144)
-    .text(`Due by: ${content.invoice.due}`, 284, 144);
+    .text(`Date due: ${content.invoice.due}`, 284, 144);
 
   doc.moveDown();
   doc.fontSize(8);
