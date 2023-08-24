@@ -1,0 +1,5 @@
+-- CreateEnum
+CREATE TYPE "PAYMENT_STATUS" AS ENUM ('PAID', 'NOT_PAID');
+
+-- AlterTable
+ALTER TABLE "Invoice" ADD COLUMN     "paymentStatus" "PAYMENT_STATUS" NOT NULL DEFAULT 'NOT_PAID';

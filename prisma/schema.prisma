@@ -46,21 +46,30 @@ enum INVOICE_STATUS {
   NOT_SENT
 }
 
+enum PAYMENT_STATUS {
+  PAID
+  NOT_PAID
+}
+
 model Invoice {
-  id          String   @id @default(uuid())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id                String   @id @default(uuid())
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 
-  ownerId     String
-  owner       User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  ownerId           String
+  owner             User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
 
-  clientId    String
-  client      Client  @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  clientId          String
+  client            Client  @relation(fields: [clientId], references: [id], onDelete: Cascade)
 
-  status      INVOICE_STATUS @default(NOT_SENT)
-  due         String?
-  items       Item[]
-  deleted     Boolean   @default(false)
+  status            INVOICE_STATUS @default(NOT_SENT)
+  paymentStatus     PAYMENT_STATUS @default(NOT_PAID)
+  due               String?
+  items             Item[]
+  subTotal          Float     @default(0)
+  tax               Float     @default(0)
+  total             Float     @default(0)
+  deleted           Boolean   @default(false)
   
 
 }
