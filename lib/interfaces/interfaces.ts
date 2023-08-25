@@ -71,9 +71,13 @@ export interface InputProps {
 }
 
 export interface InvoiceProps {
+  id?: string;
+  status?: string;
+  items?: any;
   invoices?: Invoice[];
   due?: any;
   clientId?: string;
+  paymentStatus?: string;
 }
 
 export interface ItemProps {
