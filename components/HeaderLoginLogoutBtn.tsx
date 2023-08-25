@@ -11,7 +11,7 @@ const HeaderLoginLogoutBtn = ({ user }: { user: UserProps }) => {
   const { isUserLoggedIn } = useAuth();
   const pathname = usePathname();
 
-  if (pathname === '/login') {
+  if (pathname === '/login' || pathname?.includes('/pay')) {
     return null;
   }
 
