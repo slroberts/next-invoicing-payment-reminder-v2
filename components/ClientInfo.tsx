@@ -1,12 +1,7 @@
-import { FC } from 'react';
-import { Prisma } from '@prisma/client';
 import { AtSign, Briefcase, MapPin, PhoneCall } from 'react-feather';
+import { ClientProps } from '@/lib/interfaces/interfaces';
 
-const clients = Prisma.validator<Prisma.ClientArgs>()({});
-
-type Clients = Prisma.ClientGetPayload<typeof clients>;
-
-const ClientInfo: FC<{ client: Clients }> = ({ client }) => {
+const ClientInfo = ({ client }: { client: ClientProps }) => {
   const { name, address, email, phoneNumber } = client;
   return (
     <div>
