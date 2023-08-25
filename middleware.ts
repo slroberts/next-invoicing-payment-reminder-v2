@@ -29,7 +29,7 @@ export default async function middleware(
   const requiresAuthentication = protectedPages.some((page) => {
     if (pathname.startsWith(page)) {
       const subPath = pathname.substring(page.length);
-      return !subPath || subPath.startsWith('/');
+      return !subPath || subPath.startsWith('/') || subPath.startsWith('/pay');
     }
     return false;
   });
