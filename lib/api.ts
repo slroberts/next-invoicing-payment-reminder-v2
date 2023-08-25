@@ -87,6 +87,20 @@ export const deleteInvoice = async (invoiceId: string): Promise<any> => {
   });
 };
 
+export const updateTotalOnInvoice = async (
+  invoiceId: string,
+  subTotal: number,
+  salesTax: number,
+  total: number
+): Promise<any> => {
+  return fetcher({
+    url: `/api/invoice/updateTotalOnInvoice`,
+    method: 'PUT',
+    body: { invoiceId, subTotal, salesTax, total },
+    json: true,
+  });
+};
+
 export const createNewItem = async (item: ItemProps): Promise<any> => {
   return fetcher<ItemProps>({
     url: '/api/item/addItem',
