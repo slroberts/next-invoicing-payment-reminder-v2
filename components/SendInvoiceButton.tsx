@@ -1,19 +1,27 @@
 'use client';
-import { SendButtonProps } from '@/lib/interfaces/interfaces';
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import Button from './Button';
+import {
+  ClientProps,
+  InvoiceProps,
+  ItemProps,
+  UserProps,
+} from '@/lib/interfaces/interfaces';
 
-const SendInvoiceButton: FC<SendButtonProps> = ({
+const SendInvoiceButton = ({
   user,
   client,
   invoice,
   items,
-  subTotal,
-  salesTax,
-  total,
+}: {
+  user: UserProps;
+  client: ClientProps;
+  invoice: InvoiceProps;
+  items: ItemProps;
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isEmailSent, setIsEmailSent] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const sendInvoice = async () => {
     const data = {
@@ -24,15 +32,12 @@ const SendInvoiceButton: FC<SendButtonProps> = ({
     const content = {
       invoice,
       items,
-      subTotal,
-      salesTax,
-      total,
     };
 
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/sendPDF', {
+      const response = await fetch('/api/sendInvoice', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -43,25 +48,27 @@ const SendInvoiceButton: FC<SendButtonProps> = ({
       if (response.ok) {
         setIsEmailSent(true);
         location.reload();
-        console.log('Email sent successfully');
       } else {
-        console.error('Failed to send email');
+        setErrorMessage('Failed to send email. Please try again later.');
       }
     } catch (error) {
-      console.error('Error sending email:', error);
+      setErrorMessage('Error sending email. Please try again later.');
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <Button
-      onClick={sendInvoice}
-      className='text-sm md:text-base'
-      disabled={isLoading || isEmailSent}
-    >
-      {isLoading ? 'Sending...' : isEmailSent ? 'Email Sent' : 'Send Invoice'}
-    </Button>
+    <>
+      {errorMessage && <p>{errorMessage}</p>}
+      <Button
+        onClick={sendInvoice}
+        className='text-sm md:text-base'
+        disabled={isLoading || isEmailSent}
+      >
+        {isLoading ? 'Sending...' : isEmailSent ? 'Email Sent' : 'Send Invoice'}
+      </Button>
+    </>
   );
 };
 
