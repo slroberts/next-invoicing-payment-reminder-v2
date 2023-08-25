@@ -8,8 +8,7 @@ import { FC, useState } from 'react';
 import { PlusCircle } from 'react-feather';
 import FormModal from './FormModal';
 
-const NewItemForm: FC<ItemProps> = ({ invoice, label }) => {
-  const invoiceId = invoice?.id!;
+const NewItemForm: FC<ItemProps> = ({ invoiceId, label }) => {
   const [item, setItem] = useState({
     name: '',
     price: '',
