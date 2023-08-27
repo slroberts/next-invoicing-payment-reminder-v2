@@ -74,6 +74,4 @@ npm run prisma:seed
 - `cypress`: End-to-end testing framework.
 - `ts-node`: TypeScript execution environment and REPL.
 
-Please note that the versions listed here are based on the provided `package.json` file. It is recommended to keep the dependencies up-to-date by periodically checking for updates and running `npm update`.
-
 If you have any questions or need further assistance, please don't hesitate to ask!
