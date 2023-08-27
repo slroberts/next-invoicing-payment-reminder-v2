@@ -60,7 +60,11 @@ const SendInvoiceButton = ({
 
   return (
     <>
-      {errorMessage && <p>{errorMessage}</p>}
+      {errorMessage && (
+        <p className=' mr-4 py-2 px-6 bg-red-50 text-red-500 border border-red-200'>
+          {errorMessage}
+        </p>
+      )}
       <Button
         onClick={sendInvoice}
         className='text-sm md:text-base'
