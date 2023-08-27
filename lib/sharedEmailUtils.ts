@@ -56,7 +56,7 @@ export async function sendEmailAndHandleDB(
   });
 
   const msg = {
-    to: `${data.client.email}`,
+    to: data.client.email,
     from: FROM_EMAIL,
     subject: emailSubject,
     html: renderedEmail,
