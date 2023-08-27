@@ -50,38 +50,29 @@ npm run prisma:seed
 
 ## Dependencies
 
-- `@prisma/client`: Prisma client for database access.
+- `@prisma/client & prisma`: ORM for type-safe database access.
 - `@sendgrid/mail`: SendGrid library for email functionality.
-- `@types/node`: TypeScript type definitions for Node.js.
-- `@types/react`: TypeScript type definitions for React.
-- `@types/react-dom`: TypeScript type definitions for React DOM.
-- `bcrypt`: Library for password hashing.
-- `class-variance-authority`: Utility library for class name variance.
-- `clsx`: Library for conditional class names.
-- `cookie`: Library for handling cookies.
+- `@stripe/stripe-js & stripe`: Handling Stripe payments.
+- `bcrypt`: Hashing library, mainly used for passwords.
+- `cookie`: Parsing and serializing HTTP cookies.
 - `ejs`: A simple templating language for generating HTML markup with plain JavaScript.
-- `jose`: Library for JSON Web Signature (JWS) and JSON Web Encryption (JWE).
-- `next`: Framework for server-rendered React applications.
-- `pdfkit`: Library for generating PDF documents.
-- `postcss`: CSS postprocessor tool.
-- `prisma`: Prisma ORM for database management.
-- `react`: JavaScript library for building user interfaces.
-- `react-dom`: React package for working with the DOM.
+- `next`: The React framework for server-rendered or statically-exported React apps.
+- `react & react-dom`: The core React library and the DOM bindings.
 - `react-feather`: Library of customizable SVG icons.
-- `react-modal`: Library for creating modal dialogs in React.
-- `tailwindcss`: Utility-first CSS framework.
-- `text-encoding`: Polyfill for TextEncoder and TextDecoder APIs.
-- `ts-node`: TypeScript execution environment for Node.js.
-- `typescript`: TypeScript language and compiler.
+- `react-modal`: Accessible modal dialog components for React.
+- `tailwindcss`: A utility-first CSS framework.
+- `typescript & @types/`: TypeScript language and type definitions for various libraries.
+- `clsx`: A utility for conditionally constructing classnames.
+- `jose`: JavaScript Object Signing and Encryption.
+- `class-variance-authority`: Utility library for class name variance.
+- `text-encoding`: Encoding and decoding for text.
+- `eslint & eslint-config-next`: Linting tools for ensuring code quality.
+- `autoprefixer & postcss`: Tools for processing and optimizing CSS.
 
 ## Dev Dependencies
 
-- `@types/bcrypt`: TypeScript type definitions for `bcrypt` library.
-- `@types/cookie`: TypeScript type definitions for `cookie` library.
-- `@types/pdfkit`: TypeScript type definitions for `pdfkit` library.
-- `@types/react-modal`: TypeScript type definitions for `react-modal` library.
-- `@types/text-encoding`: TypeScript type definitions for `text-encoding` library.
-- `cypress`: Testing framework for end-to-end tests.
+- `cypress`: End-to-end testing framework.
+- `ts-node`: TypeScript execution environment and REPL.
 
 Please note that the versions listed here are based on the provided `package.json` file. It is recommended to keep the dependencies up-to-date by periodically checking for updates and running `npm update`.
 
