@@ -5,7 +5,7 @@ import { resolve } from 'path';
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY as string);
 
-export const FROM_EMAIL = 'info@invoicingpaymentreminder.com';
+export const FROM_EMAIL = 'noreply@invoicingpaymentreminder.com';
 
 export async function sendEmailAndHandleDB(
   data: any,
