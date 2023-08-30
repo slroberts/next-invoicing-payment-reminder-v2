@@ -44,10 +44,12 @@ export default function AuthForm({ mode }: { mode: 'register' | 'login' }) {
           await login(formState);
         }
         localStorage.setItem('user', JSON.stringify(formState));
-        router.replace('/dashboard');
+        router.push('/dashboard');
         setIsUserLoggedIn(true);
       } catch (e) {
-        setError(`Could not ${mode}`);
+        mode === 'register'
+          ? setError('This email address is already in use.')
+          : setError('Invalid login');
       } finally {
         setFormState({ ...initial });
       }
@@ -62,6 +64,11 @@ export default function AuthForm({ mode }: { mode: 'register' | 'login' }) {
         <div className='text-center'>
           <h2 className='text-3xl mb-2'>{content.header}</h2>
           <p className='tex-lg text-black/25'>{content.subheader}</p>
+          {error && (
+            <p className='mt-6 py-2 bg-red-50 text-red-500 border border-red-200'>
+              {error}
+            </p>
+          )}
         </div>
         <form onSubmit={handleSubmit} className='py-10 w-full'>
           {mode === 'register' && (
