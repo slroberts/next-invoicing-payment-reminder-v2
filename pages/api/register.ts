@@ -7,7 +7,22 @@ export default async function register(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method === 'POST') {
+  if (req.method !== 'POST') {
+    return res.status(405).end('Method Not Allowed');
+  }
+
+  // Check if user already exists
+  const existingUser = await db.user.findUnique({
+    where: {
+      email: req.body.email,
+    },
+  });
+
+  if (existingUser) {
+    return res.status(400).json({ error: 'Email already in use' });
+  }
+
+  try {
     const user = await db.user.create({
       data: {
         email: req.body.email,
@@ -26,10 +41,9 @@ export default async function register(
         maxAge: 60 * 60 * 24 * 7,
       })
     );
-    res.status(201);
-    res.end();
-  } else {
-    res.status(402);
-    res.end();
+    return res.status(201).json({ message: 'Registration successful' });
+  } catch (error) {
+    console.error('Error during registration:', error);
+    return res.status(500).json({ error: 'Internal Server Error' });
   }
 }
