@@ -121,4 +121,5 @@ export interface UserProps {
   password?: string;
   firstName?: string | null;
   lastName?: string | null;
+  stripeAccountId?: string | null;
 }

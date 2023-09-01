@@ -5,37 +5,50 @@ import useInvoiceParams from '@/hooks/useInvoiceParams';
 import LoadingSpinner from '@/components/LoadingSpinner';
 
 export default function PayPage() {
-  const { userId, clientId, invoiceId, total } = useInvoiceParams();
+  const { stripeAccountId, userId, clientId, invoiceId, total } =
+    useInvoiceParams();
 
   const processPayment = useCallback(async () => {
-    const response = await fetch('/api/create-checkout-session', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        userId,
-        invoiceId,
-        clientId,
-        total,
-      }),
-    });
+    try {
+      const response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          stripeAccountId,
+          userId,
+          invoiceId,
+          clientId,
+          total,
+        }),
+      });
 
-    const { sessionId } = await response.json();
-    const stripe = await loadStripe(
-      process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
-    );
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(
+          errorData.message || 'Failed to create checkout session'
+        );
+      }
 
-    if (stripe === null) {
-      console.error('Failed to initialize Stripe');
-      return;
+      const { sessionId } = await response.json();
+
+      const stripe = await loadStripe(
+        process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
+      );
+
+      if (stripe === null) {
+        throw new Error('Failed to initialize Stripe');
+      }
+
+      const { error } = await stripe.redirectToCheckout({ sessionId });
+      if (error) {
+        throw error;
+      }
+    } catch (error) {
+      console.error('Payment process error:', error);
     }
-
-    const { error } = await stripe.redirectToCheckout({ sessionId });
-    if (error) {
-      console.error(error);
-    }
-  }, [userId, invoiceId, clientId, total]);
+  }, [stripeAccountId, userId, invoiceId, clientId, total]);
 
   useEffect(() => {
     const checkPaymentStatusAndProcess = async () => {

@@ -29,7 +29,7 @@ export default function CancelPage() {
           className='mt-8 text-sm md:text-base float-right'
           onClick={() => {
             router.push(
-              `/pay?userId=${userId}&clientId=${clientId}&invoiceId=${invoiceId}&total=${total}`
+              `/pay?stripeAccountId=${user?.stripeAccountId}&userId=${userId}&clientId=${clientId}&invoiceId=${invoiceId}&total=${total}`
             );
           }}
         >

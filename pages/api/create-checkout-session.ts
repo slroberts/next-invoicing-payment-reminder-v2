@@ -12,15 +12,16 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
 // eslint-disable-next-line import/no-anonymous-default-export
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const { userId, clientId, invoiceId, total } = req.body;
+    const { userId, clientId, invoiceId, total, stripeAccountId } = req.body;
 
-    if (!userId || !clientId || !invoiceId || !total) {
+    if (!userId || !clientId || !invoiceId || !total || !stripeAccountId) {
       return res
         .status(400)
         .json({ message: 'Required input parameters are missing' });
     }
 
     const totalInCents = Math.round(Number(total) * 100);
+    const applicationFee = Math.round(totalInCents * 0.05);
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -38,12 +39,18 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       ],
       mode: 'payment',
       success_url: `${req.headers.origin}/pay/success?session_id={CHECKOUT_SESSION_ID}&userId=${userId}&clientId=${clientId}&invoiceId=${invoiceId}`,
-      cancel_url: `${req.headers.origin}/pay/cancel?userId=${userId}&clientId=${clientId}&invoiceId=${invoiceId}&total=${total}`,
+      cancel_url: `${req.headers.origin}/pay/cancel?stripeAccountId=${stripeAccountId}&userId=${userId}&clientId=${clientId}&invoiceId=${invoiceId}&total=${total}`,
+      payment_intent_data: {
+        application_fee_amount: applicationFee,
+        transfer_data: {
+          destination: stripeAccountId,
+        },
+      },
     });
 
     res.status(200).json({ sessionId: session.id });
   } catch (error) {
     console.error('Error creating Stripe session:', error);
-    res.status(500).json({ message: 'Internal server error.' });
+    res.status(500).json({ message: error });
   }
 };

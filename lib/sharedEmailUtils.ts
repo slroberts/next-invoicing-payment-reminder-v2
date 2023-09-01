@@ -25,7 +25,7 @@ export async function sendEmailAndHandleDB(
 
   const commonEmailProps = {
     userId: user.id,
-    userName: user.firstName,
+    userName: `${user.firstName} ${user.lastName}`,
     userEmail: user.email,
     clientId: client.id,
     clientName: client.name,
@@ -43,6 +43,7 @@ export async function sendEmailAndHandleDB(
           subTotal: invoice.updatedInvoice.subTotal,
           salesTax: invoice.updatedInvoice.tax,
           total: invoice.updatedInvoice.total,
+          stripeAccountId: user.stripeAccountId,
         }
       : {
           subTotal: invoice.subTotal,
