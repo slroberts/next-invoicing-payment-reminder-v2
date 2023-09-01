@@ -28,7 +28,7 @@ export default async function Page() {
   return (
     <div>
       <div className='grid lg:grid-flow-col-dense gap-8 py-8'>
-        <div className='col-auto'>
+        <div className='col-span-12 md:col-auto'>
           <h3 className='text-xl font-medium mb-6'>
             Add a client to create an invoice
           </h3>

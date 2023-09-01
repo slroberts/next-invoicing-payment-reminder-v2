@@ -63,7 +63,7 @@ export default function AuthForm({ mode }: { mode: 'register' | 'login' }) {
     <Card>
       <div className='w-full'>
         <div className='text-center'>
-          <h2 className='text-3xl mb-2'>{content.header}</h2>
+          <h2 className='text-2xl sm:text-3xl mb-2'>{content.header}</h2>
           <p className='tex-lg text-black/25'>{content.subheader}</p>
           {error && (
             <p className='mt-6 py-2 bg-red-50 text-red-500 border border-red-200'>
@@ -73,8 +73,8 @@ export default function AuthForm({ mode }: { mode: 'register' | 'login' }) {
         </div>
         <form onSubmit={handleSubmit} className='py-10 w-full'>
           {mode === 'register' && (
-            <div className='flex gap-4 mb-8 justify-between flex-col sm:flex-row'>
-              <div className='w-full mb-4 sm:mb-0'>
+            <div className='flex gap-4 mb-4 sm:mb-8 justify-between flex-col sm:flex-row'>
+              <div className='w-full'>
                 <div className='text-sm mb-4 ml-2 text-blue-600 font-semibold'>
                   First Name
                 </div>
@@ -108,7 +108,7 @@ export default function AuthForm({ mode }: { mode: 'register' | 'login' }) {
               </div>
             </div>
           )}
-          <div className='mb-8'>
+          <div className='mb-4 sm:mb-8'>
             <div className='text-sm mb-4 ml-2 text-blue-600 font-semibold'>
               Email
             </div>
@@ -140,7 +140,7 @@ export default function AuthForm({ mode }: { mode: 'register' | 'login' }) {
               }
             />
           </div>
-          <div className='flex items-center justify-between'>
+          <div className='flex flex-wrap gap-6 items-center justify-between'>
             <div>
               <span>
                 <Link

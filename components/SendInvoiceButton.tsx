@@ -59,7 +59,7 @@ const SendInvoiceButton = ({
   };
 
   return (
-    <>
+    <div className='flex flex-wrap-reverse gap-6 sm:gap-0'>
       {errorMessage && (
         <p className=' mr-4 py-2 px-6 bg-red-50 text-red-500 border border-red-200'>
           {errorMessage}
@@ -67,12 +67,12 @@ const SendInvoiceButton = ({
       )}
       <Button
         onClick={sendInvoice}
-        className='text-sm md:text-base'
+        className='text-base md:text-lg'
         disabled={isLoading || isEmailSent}
       >
         {isLoading ? 'Sending...' : isEmailSent ? 'Email Sent' : 'Send Invoice'}
       </Button>
-    </>
+    </div>
   );
 };
 
