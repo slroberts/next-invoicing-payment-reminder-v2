@@ -135,7 +135,7 @@ const Invoice: FC<WebInvoiceProps> = ({ user, invoice = {}, client }) => {
           <div className='px-6 col-start-4 md:col-start-10'>${total}</div>
         </div>
       </div>
-      {user &&
+      {user?.stripeAccountId &&
         client &&
         localInvoice &&
         items &&
