@@ -14,6 +14,7 @@ const LogoutButton: FC = () => {
         method: 'POST',
       });
       router.replace(`/login`);
+      router.refresh();
       localStorage.removeItem('user');
       setIsUserLoggedIn(false);
     } catch (error) {

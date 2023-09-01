@@ -45,6 +45,7 @@ export default function AuthForm({ mode }: { mode: 'register' | 'login' }) {
         }
         localStorage.setItem('user', JSON.stringify(formState));
         router.push('/dashboard');
+        router.refresh();
         setIsUserLoggedIn(true);
       } catch (e) {
         mode === 'register'
