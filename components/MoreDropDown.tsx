@@ -4,6 +4,7 @@ import { ClientProps } from '@/lib/interfaces/interfaces';
 import { useState, useRef, useEffect, FC } from 'react';
 import { MoreVertical, Trash2 } from 'react-feather';
 import NewInvoiceForm from './NewInvoiceForm';
+import EditClientForm from './EditClientForm';
 
 const MoreDropDown: FC<ClientProps> = ({ client }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -46,7 +47,7 @@ const MoreDropDown: FC<ClientProps> = ({ client }) => {
   };
 
   return (
-    <div  id='more-dropdown'>
+    <div id='more-dropdown'>
       <button onClick={toggleDropdown}>
         <MoreVertical className='text-slate-500' />
       </button>
@@ -54,15 +55,22 @@ const MoreDropDown: FC<ClientProps> = ({ client }) => {
         {isOpen && (
           <div className='absolute -ml-14 bg-white p-2 divide divide-y border-solid border-slate-200 shadow-md rounded-sm'>
             {/* Dropdown Content */}
-            <div id="new-invoice" className='py-2 scale-90'>
+            <div id='new-invoice' className='py-2 scale-90'>
               <NewInvoiceForm
                 client={client}
                 label='New Invoice'
                 modalRef={modalRef}
               />
             </div>
+            <div id='edit-client' className='py-2 scale-90'>
+              <EditClientForm
+                client={client}
+                label='Edit Client'
+                modalRef={modalRef}
+              />
+            </div>
             <div
-              id="delete-client"
+              id='delete-client'
               onClick={handleDeleteClient}
               className='py-2 scale-90 flex w-max items-center hover:cursor-pointer  transition-opacity hover:opacity-70'
             >

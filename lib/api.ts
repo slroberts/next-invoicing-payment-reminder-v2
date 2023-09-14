@@ -62,6 +62,25 @@ export const createNewClient = async (client: ClientProps): Promise<any> => {
   });
 };
 
+interface ClientUpdateData {
+  name?: string;
+  address?: string;
+  email?: string;
+  phoneNumber?: string;
+}
+
+export const editClient = async (
+  clientId: string,
+  updateData: ClientUpdateData
+): Promise<any> => {
+  return fetcher<ClientProps>({
+    url: `/api/client/${clientId}`,
+    method: 'PUT',
+    body: updateData,
+    json: true,
+  });
+};
+
 export const deleteClient = async (clientId: string): Promise<any> => {
   return fetcher<void>({
     url: `/api/client/${clientId}`,
