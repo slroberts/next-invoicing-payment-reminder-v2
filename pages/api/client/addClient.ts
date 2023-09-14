@@ -20,9 +20,6 @@ export default async function handler(
         req.cookies[process.env.COOKIE_NAME as string]
       );
 
-      console.log('User:', user);
-      console.log('Cookie:', req.cookies[process.env.COOKIE_NAME as string]);
-
       const newClient = await db.client.create({
         data: {
           name,
@@ -32,8 +29,6 @@ export default async function handler(
           ownerId: user.id,
         },
       });
-
-      console.log('New client:', newClient);
 
       res.status(201).json({ data: { newClient } });
     } catch (error) {
