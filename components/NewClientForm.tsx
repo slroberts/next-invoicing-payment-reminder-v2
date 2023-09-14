@@ -7,6 +7,7 @@ import { ClientProps } from '@/lib/interfaces/interfaces';
 import { FC, useState } from 'react';
 import Button from './Button';
 import FormModal from './FormModal';
+import { formatPhoneNumber } from '@/lib/utils';
 
 const NewClientForm: FC<ClientProps> = () => {
   const [client, setClient] = useState({
@@ -77,7 +78,7 @@ const NewClientForm: FC<ClientProps> = () => {
       label: 'Phone Number',
       type: 'tel',
       placeholder: 'ex. 000-000-0000',
-      value: client.phoneNumber,
+      value: formatPhoneNumber(client.phoneNumber),
       setValue: (value: string) => setClient({ ...client, phoneNumber: value }),
     },
   ];

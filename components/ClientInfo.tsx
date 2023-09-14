@@ -1,8 +1,10 @@
 import { AtSign, Briefcase, MapPin, PhoneCall } from 'react-feather';
 import { ClientProps } from '@/lib/interfaces/interfaces';
+import { formatPhoneNumber } from '@/lib/utils';
 
 const ClientInfo = ({ client }: { client: ClientProps }) => {
   const { name, address, email, phoneNumber } = client;
+
   return (
     <div>
       <h1 className='flex gap-2 items-center font-bold text-lg'>
@@ -21,7 +23,7 @@ const ClientInfo = ({ client }: { client: ClientProps }) => {
         </p>
         <p className='md:pl-6 flex gap-2 items-center'>
           <PhoneCall className='hidden md:block text-blue-400 w-[1.25rem] h-[1.25rem]' />
-          {phoneNumber}
+          {formatPhoneNumber(phoneNumber as string)}
         </p>
       </div>
     </div>

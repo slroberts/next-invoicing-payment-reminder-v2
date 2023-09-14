@@ -1,8 +1,9 @@
 import { FC } from 'react';
 import { Prisma } from '@prisma/client';
 import InvoicesCountAndSentStatus from './InvoicesCountAndSentStatus';
+import { formatPhoneNumber } from '@/lib/utils';
 
-const clients = Prisma.validator<Prisma.ClientArgs>()({
+const clients = Prisma.validator<Prisma.ClientDefaultArgs>()({
   include: {
     invoices: true,
   },
@@ -15,12 +16,14 @@ const ClientCard: FC<{ client: Clients }> = ({ client }) => {
 
   return (
     <div className='text-sm leading-4'>
-      <p className='flex gap-2 items-center font-bold text-base'>{name}</p>
+      <p className='font-bold text-base'>
+        {name.length > 15 ? `${name.slice(0, 15)}...` : name}
+      </p>
 
       <div className='hidden md:block'>
         <p>{address}</p>
         <p>{email}</p>
-        <p>{phoneNumber}</p>
+        <p className='mt-2'>{formatPhoneNumber(phoneNumber)}</p>
       </div>
 
       <InvoicesCountAndSentStatus client={client} />
