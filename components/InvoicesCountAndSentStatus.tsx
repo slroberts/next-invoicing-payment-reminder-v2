@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Prisma } from '@prisma/client';
 import { FileText, Send } from 'react-feather';
 
-const clients = Prisma.validator<Prisma.ClientArgs>()({
+const clients = Prisma.validator<Prisma.ClientDefaultArgs>()({
   include: {
     invoices: true,
   },
