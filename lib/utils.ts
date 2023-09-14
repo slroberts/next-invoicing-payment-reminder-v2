@@ -15,3 +15,17 @@ export function calculateSubTotal(items: ItemProps[]) {
 
   return parseFloat(sum.toFixed(2));
 }
+
+export function formatPhoneNumber(input: string) {
+  let numbersOnly = input.replace(/\D/g, '');
+
+  if (numbersOnly.length > 10) {
+    numbersOnly = numbersOnly.substring(0, 10);
+  }
+
+  if (numbersOnly.length !== 10) {
+    console.error('Phone number must have exactly 10 digits');
+  }
+
+  return numbersOnly.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+}
