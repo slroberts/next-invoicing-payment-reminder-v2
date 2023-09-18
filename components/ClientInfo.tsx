@@ -12,7 +12,7 @@ const ClientInfo = ({ client }: { client: ClientProps }) => {
         {name}
       </h1>
 
-      <div className='flex flex-col md:flex-row md:gap-8 md:text-lg md:divide md:divide-x mt-4'>
+      <div className='flex flex-col md:flex-row md:gap-8 lg:text-lg md:divide md:divide-x mt-4'>
         <p className='flex gap-2 items-center'>
           <MapPin className='hidden md:block text-blue-400 w-[1.25rem] h-[1.25rem]' />
           {address}
