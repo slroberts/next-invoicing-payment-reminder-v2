@@ -1,16 +1,17 @@
-import ClientCard from '@/components/ClientCard';
-import MoreDropDown from '@/components/MoreDropDown';
-import NewClientForm from '@/components/NewClientForm';
 import { getUserFromCookie } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { cookies } from 'next/headers';
-import Link from 'next/link';
+import { IClient } from '@/lib/interfaces/interfaces';
 import Image from 'next/image';
+import ClientsList from '@/components/dashboard/ClientsList';
+import FinancialsChart from '@/components/dashboard/FinancialsChart';
+import TotalRevenue from '@/components/dashboard/TotalRevenue';
+import RecentlyPaidList from '@/components/dashboard/RecentlyPaidList';
 import receipt from '@/assets/images/undraw_fill_in_mie5.svg';
 
-const getData = async () => {
+const getClients = async () => {
   const user = await getUserFromCookie(cookies() as any);
-  const clients = await db.client.findMany({
+  const clientsData = await db.client.findMany({
     where: {
       ownerId: user?.id,
     },
@@ -19,51 +20,44 @@ const getData = async () => {
     },
   });
 
-  return { clients };
+  return { clientsData };
 };
 
 export default async function Page() {
-  const { clients } = await getData();
+  const { clientsData } = await getClients();
+  const clients = (clientsData as IClient[]) || [];
+  const allInvoices = clients.flatMap((client) => client.invoices || []);
 
   return (
-    <div className='mt-8 flex lg:flex-row flex-col gap-8 justify-between'>
-      <div className='w-full md:w-[30rem]'>
-        <h3 className='text-xl font-medium mb-6'>
-          Add a client to create an invoice
-        </h3>
-        <NewClientForm />
-      </div>
-      {clients.length > 0 ? (
-        <div className='w-full'>
-          <div className='grid md:grid-cols-3 md:gap-4'>
-            {clients.map((client: any) => (
-              <div key={client.id}>
-                <div className='float-right mt-4 mr-3'>
-                  <MoreDropDown client={client} />
-                </div>
-                <div className='h-full p-4 bg-slate-50 border shadow-sm hover:border-blue-400 hover:transition-colors'>
-                  <Link href={`/dashboard/client/${client.id}`}>
-                    <ClientCard client={client} />
-                  </Link>
-                </div>
-              </div>
-            ))}
+    <section>
+      <h1 className='text-slate-500 text-lg font-medium py-2'>Dashboard</h1>
+      <div className='w-full flex flex-wrap lg:flex-nowrap justify-between gap-4'>
+        <ClientsList clients={clients} />
+
+        {clients.length > 0 ? (
+          <>
+            <FinancialsChart clients={clients} invoices={allInvoices} />
+
+            <div className='w-full lg:w-80 flex flex-col gap-4'>
+              <TotalRevenue invoices={allInvoices} />
+              <RecentlyPaidList clients={clients} />
+            </div>
+          </>
+        ) : (
+          <div className='max-w-7xl mx-auto'>
+            <figure>
+              <Image
+                src={receipt}
+                alt='Invoicing illustration - man in a black shirt with gray pants and black shoes looking at a large invoice.'
+                width={560}
+                height={420}
+                priority
+                className='opacity-50'
+              />
+            </figure>
           </div>
-        </div>
-      ) : (
-        <div className='flex flex-col px-12'>
-          <figure className='opacity-20 self-center'>
-            <Image
-              src={receipt}
-              alt='Invoicing illustration - man in a black shirt with gray pants and black shoes looking at a large invoice.'
-              width={560}
-              height={420}
-              priority
-            />
-          </figure>
-          <div className='text-center mt-8'>Add clients to get started.</div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </section>
   );
 }
