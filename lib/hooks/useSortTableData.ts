@@ -1,39 +1,62 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
-type SortDirection = 'asc' | 'desc';
+type SortDirection = 'asc' | 'desc' | '';
+
+interface SortState<T> {
+  sortedData: T[];
+  sortDirection: SortDirection;
+  sortedColumn: keyof T | null;
+}
 
 const useSortTableData = <T extends object>(
   initialData: T[],
   initialDirection: SortDirection = 'asc',
   defaultSortColumn?: keyof T
 ) => {
-  const [sortedData, setSortedData] = useState<T[]>(initialData);
-  const [sortDirection, setSortDirection] =
-    useState<SortDirection>(initialDirection);
-  const [sortedColumn, setSortedColumn] = useState<keyof T | null>(null);
+  const [sortState, setSortState] = useState<SortState<T>>({
+    sortedData: initialData,
+    sortDirection: initialDirection,
+    sortedColumn: null,
+  });
+
+  const sortDataBy = useCallback(
+    (property: keyof T, direction: SortDirection) => {
+      setSortState((currentState) => {
+        const newDirection = direction;
+
+        const sorted = [...currentState.sortedData].sort((a, b) =>
+          newDirection === 'asc'
+            ? String(a[property]).localeCompare(String(b[property]))
+            : String(b[property]).localeCompare(String(a[property]))
+        );
+
+        return {
+          ...currentState,
+          sortedData: sorted,
+          sortDirection: newDirection,
+          sortedColumn: property,
+        };
+      });
+    },
+    []
+  );
+
+  const resetSorting = useCallback(() => {
+    setSortState((currentState) => ({
+      ...currentState,
+      sortDirection: initialDirection,
+      sortedColumn: null,
+    }));
+  }, [initialDirection]);
 
   useEffect(() => {
     if (defaultSortColumn) {
-      sortDataBy(defaultSortColumn);
+      sortDataBy(defaultSortColumn, initialDirection);
     }
-  }, []);
+  }, [sortDataBy, defaultSortColumn, initialDirection]);
 
-  const sortDataBy = (property: keyof T) => {
-    const newDirection =
-      sortedColumn === property && sortDirection === 'asc' ? 'desc' : 'asc';
-
-    const sorted = [...sortedData].sort((a, b) =>
-      newDirection === 'asc'
-        ? String(a[property]).localeCompare(String(b[property]))
-        : String(b[property]).localeCompare(String(a[property]))
-    );
-
-    setSortDirection(newDirection);
-    setSortedColumn(property);
-    setSortedData(sorted);
-  };
-
-  return { sortedData, sortDataBy, sortDirection, sortedColumn };
+  const { sortedData, sortDirection, sortedColumn } = sortState;
+  return { sortedData, sortDataBy, sortDirection, sortedColumn, resetSorting };
 };
 
 export default useSortTableData;
