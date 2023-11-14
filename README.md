@@ -60,6 +60,7 @@ npm run prisma:seed
 - `react & react-dom`: The core React library and the DOM bindings.
 - `react-feather`: Library of customizable SVG icons.
 - `react-modal`: Accessible modal dialog components for React.
+- `recharts` : A composable charting library built on React components.
 - `tailwindcss`: A utility-first CSS framework.
 - `typescript & @types/`: TypeScript language and type definitions for various libraries.
 - `clsx`: A utility for conditionally constructing classnames.
