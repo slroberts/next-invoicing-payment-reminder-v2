@@ -1,4 +1,4 @@
-import { ItemProps } from './interfaces/interfaces';
+import { IItem } from './interfaces/interfaces';
 
 export function capitalizeWords(str: string) {
   return str.replace(/(^|\s)\S/g, function (firstLetter) {
@@ -6,7 +6,7 @@ export function capitalizeWords(str: string) {
   });
 }
 
-export function calculateSubTotal(items: ItemProps[]) {
+export function calculateSubTotal(items: IItem[]) {
   let sum = 0;
 
   for (let item of items) {
@@ -25,3 +25,10 @@ export function formatPhoneNumber(input: string) {
 
   return numbersOnly.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
 }
+
+export const truncateName = (fullName: string) => {
+  const maxLength = 15;
+  return fullName.length > maxLength
+    ? `${fullName.slice(0, maxLength)}...`
+    : fullName;
+};
