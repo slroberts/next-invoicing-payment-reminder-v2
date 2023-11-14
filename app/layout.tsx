@@ -1,6 +1,6 @@
 import '@/styles/global.css';
-import Footer from '@/components/Footer';
-import Header from '@/components/Header';
+import Footer from '@/components/shared/Footer';
+import Header from '@/components/shared/Header';
 import { AuthProvider } from '../contexts/AuthContext';
 
 export default function IndexLayout({
@@ -12,7 +12,7 @@ export default function IndexLayout({
     <AuthProvider>
       <html lang='en'>
         <head />
-        <body className='flex flex-col h-screen md:max-w-4xl lg:max-w-6xl mx-auto px-8'>
+        <body className='bg-slate-950 flex flex-col w-screen h-screen px-8 md:px-16'>
           <Header />
           <main>{children}</main>
           <div id='modal' className='mx-0 my-0'></div>
