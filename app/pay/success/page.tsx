@@ -1,9 +1,9 @@
 'use client';
-import Invoice from '@/components/Invoice';
-import UserInfo from '@/components/UserInfo';
 import useInvoiceParams from '@/hooks/useInvoiceParams';
 import useInvoiceData from '@/hooks/useInvoiceData';
-import LoadingSpinner from '@/components/LoadingSpinner';
+import Invoice from '@/components/invoice/Invoice';
+import UserInfo from '@/components/shared/UserInfo';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
 
 export default function SuccessPage() {
   const { userId, clientId, invoiceId } = useInvoiceParams();
@@ -16,16 +16,20 @@ export default function SuccessPage() {
 
   return (
     <div>
-      <h1 className='font-bold mb-2'>Payment Successful</h1>
-      <p>Thank you for your payment, your transaction has been completed.</p>
+      <h1 className='my-2 font-bold text-2xl text-slate-200'>
+        Payment Successful
+      </h1>
+      <p className='text-slate-200'>
+        Thank you for your payment, your transaction has been completed.
+      </p>
 
-      <hr className='my-6' />
+      <hr className='my-8 border-[.0125rem] border-slate-700' />
 
       {user && <UserInfo user={user} />}
 
-      <hr className='my-6' />
+      <hr className='my-8 border-[.0125rem] border-slate-700' />
 
-      {invoice && client && <Invoice invoice={invoice} client={client} />}
+      <Invoice invoice={invoice} client={client} />
     </div>
   );
 }

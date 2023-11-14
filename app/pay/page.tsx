@@ -2,7 +2,7 @@
 import { useEffect, useCallback } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import useInvoiceParams from '@/hooks/useInvoiceParams';
-import LoadingSpinner from '@/components/LoadingSpinner';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
 
 export default function PayPage() {
   const { stripeAccountId, userId, clientId, invoiceId, total } =

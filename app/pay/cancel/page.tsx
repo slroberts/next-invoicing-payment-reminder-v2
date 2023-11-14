@@ -1,11 +1,11 @@
 'use client';
-import Invoice from '@/components/Invoice';
-import Button from '@/components/Button';
 import { useRouter } from 'next/navigation';
-import UserInfo from '@/components/UserInfo';
 import useInvoiceParams from '@/hooks/useInvoiceParams';
 import useInvoiceData from '@/hooks/useInvoiceData';
-import LoadingSpinner from '@/components/LoadingSpinner';
+import Invoice from '@/components/invoice/Invoice';
+import UserInfo from '@/components/shared/UserInfo';
+import Button from '@/components/ui/Button';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
 
 export default function CancelPage() {
   const { userId, clientId, invoiceId, total } = useInvoiceParams();
@@ -21,10 +21,9 @@ export default function CancelPage() {
   return (
     <div>
       {user && <UserInfo user={user} />}
-
-      <hr className='my-6' />
-      {invoice && client && <Invoice invoice={invoice} client={client} />}
-      {client && invoice && invoice.paymentStatus == 'NOT_PAID' && (
+      <hr className='my-8 border-[.0125rem] border-slate-700' />
+      <Invoice invoice={invoice} client={client} />
+      {invoice.paymentStatus == 'NOT_PAID' && (
         <Button
           className='mt-8 text-sm md:text-base float-right'
           onClick={() => {
@@ -33,7 +32,7 @@ export default function CancelPage() {
             );
           }}
         >
-          Pay Invoice
+          Pay Invoice - <span className='text-base'>${total}</span>
         </Button>
       )}
     </div>
