@@ -6,7 +6,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
   apiVersion: '2022-11-15',
 });
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const handleStripeOAuth = async (req: NextApiRequest, res: NextApiResponse) => {
   console.log('Callback URL:', req.url);
   console.log('Query Parameters:', req.query);
 
@@ -41,3 +41,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(500).json({ error: 'Stripe OAuth process failed.' });
   }
 };
+
+export default handleStripeOAuth;

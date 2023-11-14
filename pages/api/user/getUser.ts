@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { db } from '@/lib/db';
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const getUser = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== 'GET') {
     return res.status(405).end('Method Not Allowed');
   }
@@ -36,3 +36,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+
+export default getUser;
