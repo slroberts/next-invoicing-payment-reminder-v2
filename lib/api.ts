@@ -1,9 +1,4 @@
-import {
-  ClientProps,
-  InvoiceProps,
-  ItemProps,
-  UserProps,
-} from './interfaces/interfaces';
+import { IClient, IInvoice, IItem, IUser } from './interfaces/interfaces';
 
 const fetcher = async <T>({
   url,
@@ -35,8 +30,8 @@ const fetcher = async <T>({
   }
 };
 
-export const register = async (user: UserProps): Promise<any> => {
-  return fetcher<UserProps>({
+export const register = async (user: IUser): Promise<any> => {
+  return fetcher<IUser>({
     url: '/api/register',
     method: 'POST',
     body: user,
@@ -44,8 +39,8 @@ export const register = async (user: UserProps): Promise<any> => {
   });
 };
 
-export const login = async (user: UserProps): Promise<any> => {
-  return fetcher<UserProps>({
+export const login = async (user: IUser): Promise<any> => {
+  return fetcher<IUser>({
     url: '/api/login',
     method: 'POST',
     body: user,
@@ -53,8 +48,8 @@ export const login = async (user: UserProps): Promise<any> => {
   });
 };
 
-export const createNewClient = async (client: ClientProps): Promise<any> => {
-  return fetcher<ClientProps>({
+export const createNewClient = async (client: IClient): Promise<any> => {
+  return fetcher<IClient>({
     url: '/api/client/addClient',
     method: 'POST',
     body: client,
@@ -62,7 +57,7 @@ export const createNewClient = async (client: ClientProps): Promise<any> => {
   });
 };
 
-interface ClientUpdateData {
+interface IClientUpdate {
   name?: string;
   address?: string;
   email?: string;
@@ -71,9 +66,9 @@ interface ClientUpdateData {
 
 export const editClient = async (
   clientId: string,
-  updateData: ClientUpdateData
+  updateData: IClientUpdate
 ): Promise<any> => {
-  return fetcher<ClientProps>({
+  return fetcher<IClientUpdate>({
     url: `/api/client/${clientId}`,
     method: 'PUT',
     body: updateData,
@@ -89,8 +84,13 @@ export const deleteClient = async (clientId: string): Promise<any> => {
   });
 };
 
-export const createNewInvoice = async (invoice: InvoiceProps): Promise<any> => {
-  return fetcher<InvoiceProps>({
+interface INewInvoice {
+  due: string;
+  clientId: string;
+}
+
+export const createNewInvoice = async (invoice: INewInvoice): Promise<any> => {
+  return fetcher<INewInvoice>({
     url: '/api/invoice/addInvoice',
     method: 'POST',
     body: invoice,
@@ -120,8 +120,8 @@ export const updateTotalOnInvoice = async (
   });
 };
 
-export const createNewItem = async (item: ItemProps): Promise<any> => {
-  return fetcher<ItemProps>({
+export const createNewItem = async (item: IItem): Promise<any> => {
+  return fetcher<IItem>({
     url: '/api/item/addItem',
     method: 'POST',
     body: item,

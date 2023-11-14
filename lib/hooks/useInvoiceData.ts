@@ -1,19 +1,14 @@
 import { useEffect, useState } from 'react';
-import {
-  UserProps,
-  ClientProps,
-  InvoiceProps,
-  ItemProps,
-} from '../interfaces/interfaces';
+import { IUser, IClient, IInvoice, IItem } from '../interfaces/interfaces';
 
 function useInvoiceData(
   userId: string | null | undefined,
   invoiceId: string | null | undefined,
   clientId: string | null | undefined
 ) {
-  const [user, setUser] = useState<UserProps | null>(null);
-  const [invoice, setInvoice] = useState<InvoiceProps | null>(null);
-  const [client, setClient] = useState<ClientProps | null>(null);
+  const [user, setUser] = useState<IUser | null>(null);
+  const [invoice, setInvoice] = useState<IInvoice | null>(null);
+  const [client, setClient] = useState<IClient | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isEmailSent, setIsEmailSent] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -24,10 +19,10 @@ function useInvoiceData(
     invoice,
     items,
   }: {
-    user: UserProps;
-    client: ClientProps;
-    invoice: InvoiceProps;
-    items: ItemProps;
+    user: IUser;
+    client: IClient;
+    invoice: IInvoice;
+    items: IItem;
   }) => {
     const data = {
       user,
