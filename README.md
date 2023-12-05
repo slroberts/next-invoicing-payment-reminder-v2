@@ -4,6 +4,7 @@ This Next.js application, tailored for freelancers and small businesses, offers 
 
 **It's important to note that, as of now, this application is not set up for production use.
 **
+
 ![Invoicing and Payment App Screenshot](https://shomariroberts.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fd33jlrbsef5n%2F1P3HxNekJcuIeTQq0Dguu0%2F2071b990b5c35865e373d533b9557f58%2Finvoicing-payment-reminder-app.png&w=3840&q=75)
 
 ## Key Insights
