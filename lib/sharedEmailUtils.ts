@@ -1,11 +1,12 @@
 import { readFileSync } from 'fs';
-import sgMail from '@sendgrid/mail';
+import { Resend } from 'resend';
 import ejs from 'ejs';
 import { resolve } from 'path';
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY as string);
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-export const FROM_EMAIL = 'noreply@invoicingpaymentreminder.com';
+export const FROM_EMAIL =
+  'Invoicing Payment Reminder <noreply@invoicingpaymentreminder.com>';
 
 export async function sendEmailAndHandleDB(
   data: any,
@@ -64,7 +65,7 @@ export async function sendEmailAndHandleDB(
   };
 
   try {
-    await sgMail.send(msg);
+    await resend.emails.send(msg);
     await dbUpdateFunction(content.invoice.id, dbStatus);
     return {
       status: 200,
@@ -73,8 +74,8 @@ export async function sendEmailAndHandleDB(
   } catch (error) {
     console.error('Error:', error);
     return {
-      status: 500,
-      message: 'Failed to process',
+      status: 400,
+      message: (error as Error).message,
     };
   }
 }
