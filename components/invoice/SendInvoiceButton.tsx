@@ -32,7 +32,7 @@ const SendInvoiceButton = ({
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/sendInvoice', {
+      const response = await fetch('/api/send', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
