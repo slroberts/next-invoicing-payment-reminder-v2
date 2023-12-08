@@ -19,12 +19,12 @@ const SendInvoiceButton = ({
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const sendInvoice = async () => {
-    const data = {
+    const emailData = {
       user,
       client,
     };
 
-    const content = {
+    const emailContent = {
       invoice,
       items,
     };
@@ -32,12 +32,12 @@ const SendInvoiceButton = ({
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/send', {
+      const response = await fetch('/api/sendInvoice', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ data, content }),
+        body: JSON.stringify({ emailData, emailContent }),
       });
 
       if (response.ok) {
