@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "@prisma/client": "^5.2.0",
-    "@sendgrid/mail": "^7.7.0",
     "@stripe/stripe-js": "^1.54.1",
     "@types/node": "20.3.2",
     "@types/react": "18.2.14",
@@ -23,7 +22,6 @@
     "class-variance-authority": "^0.6.1",
     "clsx": "^1.2.1",
     "cookie": "^0.5.0",
-    "ejs": "^3.1.9",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.7",
     "jose": "^4.14.4",
@@ -45,7 +43,6 @@
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/cookie": "^0.5.1",
-    "@types/ejs": "^3.1.2",
     "@types/react-modal": "^3.16.0",
     "@types/text-encoding": "^0.0.36",
     "cypress": "^12.16.0"

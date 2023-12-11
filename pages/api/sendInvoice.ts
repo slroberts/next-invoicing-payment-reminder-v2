@@ -1,10 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import {
-  InvoiceEmail,
-  InvoiceEmailProps,
-} from '@/components/emails/invoice-email';
 import { Resend } from 'resend';
 import { db } from '@/lib/db';
+import { InvoiceEmailProps } from '@/lib/interfaces/interfaces';
+import { InvoiceEmail } from '@/components/templates/invoice-email';
+import { cli } from 'cypress';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -48,6 +47,7 @@ export default async function handler(
         clientPhoneNumber: client.phoneNumber,
         invoiceId: invoice.id,
         invoiceDue: invoice.due,
+        paymentStatus: invoice.paymentStatus,
         items: items,
         subTotal: invoice.updatedInvoice.subTotal,
         salesTax: invoice.updatedInvoice.tax,
@@ -58,7 +58,7 @@ export default async function handler(
       // Email configuration
       const emailConfig = {
         from: FROM_EMAIL,
-        to: ['shomariroberts@gmail.com'],
+        to: client.email,
         subject: `New Invoice - ${invoice.id} via Invoicing Payment Reminder`,
         react: InvoiceEmail(invoiceEmailProps),
         text: `New Invoice from ${user.firstName} ${user.lastName} via Invoicing Payment Reminder`,

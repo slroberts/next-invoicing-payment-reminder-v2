@@ -60,3 +60,22 @@ export interface IItem {
   hours: number;
   deleted?: boolean;
 }
+
+export interface InvoiceEmailProps {
+  userId: string;
+  userName: string;
+  userEmail: string;
+  clientId: string;
+  clientName: string;
+  clientAddress: string;
+  clientEmail: string;
+  clientPhoneNumber: string;
+  invoiceId: string;
+  invoiceDue: string;
+  paymentStatus: string;
+  items: any[];
+  subTotal: number;
+  salesTax: number;
+  total: number;
+  stripeAccountId: string;
+}

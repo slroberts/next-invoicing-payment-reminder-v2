@@ -9,7 +9,7 @@ This Next.js application, tailored for freelancers and small businesses, offers 
 
 ## Key Insights
 
-Engaging with the tools used throughout this project has provided a robust learning experience. I've gained proficiency in secure database management, streamlined email functionality through SendGrid, and efficiently handled online payments, specifically with Stripe. The intricacies of password security and user authentication, employing bcrypt and cookies, added an interesting layer to the learning process. Utilizing EJS for dynamic email templates proved effective, and Tailwind CSS simplified styling tasks. TypeScript played a crucial role in maintaining code integrity. Cypress served as a reliable testing tool, ensuring the reliability of the codebase. Simplifying CSS for different browsers was facilitated by Autoprefixer and PostCSS. Additionally, tools addressing JavaScript Object Signing and Encryption, class names, and text encoding enriched my understanding. In summary, this hands-on experience has solidified my foundation across various facets of modern web development.
+Engaging with the tools used throughout this project has provided a robust learning experience. I've gained proficiency in secure database management, streamlined email functionality through Resend, and efficiently handled online payments, specifically with Stripe. The intricacies of password security and user authentication, employing bcrypt and cookies, added an interesting layer to the learning process. Utilizing EJS for dynamic email templates proved effective, and Tailwind CSS simplified styling tasks. TypeScript played a crucial role in maintaining code integrity. Cypress served as a reliable testing tool, ensuring the reliability of the codebase. Simplifying CSS for different browsers was facilitated by Autoprefixer and PostCSS. Additionally, tools addressing JavaScript Object Signing and Encryption, class names, and text encoding enriched my understanding. In summary, this hands-on experience has solidified my foundation across various facets of modern web development.
 
 ## Installation
 
@@ -58,11 +58,10 @@ npm run prisma:seed
 ## Dependencies
 
 - `@prisma/client & prisma`: ORM for type-safe database access.
-- `@sendgrid/mail`: SendGrid library for email functionality.
 - `@stripe/stripe-js & stripe`: Handling Stripe payments.
+- `resend`: Handling email functionality.
 - `bcrypt`: Hashing library, mainly used for passwords.
 - `cookie`: Parsing and serializing HTTP cookies.
-- `ejs`: A simple templating language for generating HTML markup with plain JavaScript.
 - `next`: The React framework for server-rendered or statically-exported React apps.
 - `react & react-dom`: The core React library and the DOM bindings.
 - `react-feather`: Library of customizable SVG icons.

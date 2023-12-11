@@ -1,31 +1,74 @@
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { Resend } from 'resend';
 import { db } from '@/lib/db';
-import { sendEmailAndHandleDB } from '@/lib/sharedEmailUtils';
+import { InvoiceEmailProps } from '@/lib/interfaces/interfaces';
+import { ConfirmationEmail } from '@/components/templates/confirmation-email';
 
-export default async function handler(req: any, res: any) {
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+export const FROM_EMAIL =
+  'Invoicing Payment Reminder <noreply@invoicingpaymentreminder.com>';
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   try {
-    const { data, content } = req.body;
-    if (!data.user || !data.client || !content.invoice) {
-      res.status(400).json({ message: 'Invalid data provided' });
-      return;
+    const { emailData, emailContent } = req.body;
+    const { user, client } = emailData;
+    const { invoice, items } = emailContent;
+
+    // Check for invalid data
+    if (!client || !invoice) {
+      return res.status(400).json({ message: 'Invalid data provided' });
     }
 
-    const response = await sendEmailAndHandleDB(
-      data,
-      content,
-      './emails/PaymentConfirmation.ejs',
-      `Payment Confirmation - ${content.invoice.id}`,
-      'PAID',
-      async (invoiceId, status) => {
-        await db.invoice.update({
-          where: { id: invoiceId },
-          data: { paymentStatus: status },
-        });
-      }
-    );
+    const invoiceEmailProps: InvoiceEmailProps = {
+      userId: user.id,
+      userName: `${user.firstName} ${user.lastName}`,
+      userEmail: user.email,
+      clientId: client.id,
+      clientName: client.name,
+      clientAddress: client.address,
+      clientEmail: client.email,
+      clientPhoneNumber: client.phoneNumber,
+      invoiceId: invoice.id,
+      invoiceDue: invoice.due,
+      paymentStatus: invoice.paymentStatus,
+      items: items,
+      subTotal: invoice.updatedInvoice.subTotal,
+      salesTax: invoice.updatedInvoice.tax,
+      total: invoice.updatedInvoice.total,
+      stripeAccountId: user.stripeAccountId,
+    };
 
-    return res.status(response.status).json({ message: response.message });
+    // Email configuration
+    const emailConfig = {
+      from: FROM_EMAIL,
+      to: client.email,
+      subject: `Payment Confirmation - ${invoice.id} via Invoicing Payment Reminder`,
+      react: ConfirmationEmail(invoiceEmailProps),
+      text: `Payment Confirmation - ${invoice.id} via Invoicing Payment Reminder`,
+    };
+
+    // Send email
+    const { data, error } = await resend.emails.send(emailConfig);
+
+    if (error) {
+      console.error('Error sending email:', error);
+      return res.status(400).json({ error: error.message });
+    }
+
+    // Update invoice status in the database
+    await db.invoice.update({
+      where: { id: invoice.id },
+      data: { paymentStatus: 'PAID' },
+    });
+
+    console.log('Email sent successfully:', data);
+    return res.status(200).json({ data });
   } catch (error) {
     console.error('Error in handler:', error);
-    return res.status(500).json({ message: 'Internal server error' });
+    return res.status(500).json({ error: 'Internal server error' });
   }
 }
