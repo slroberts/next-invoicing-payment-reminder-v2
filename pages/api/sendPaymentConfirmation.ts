@@ -36,9 +36,9 @@ export default async function handler(
       invoiceDue: invoice.due,
       paymentStatus: invoice.paymentStatus,
       items: items,
-      subTotal: invoice.updatedInvoice.subTotal,
-      salesTax: invoice.updatedInvoice.tax,
-      total: invoice.updatedInvoice.total,
+      subTotal: invoice.subTotal,
+      salesTax: invoice.tax,
+      total: invoice.total,
       stripeAccountId: user.stripeAccountId,
     };
 
