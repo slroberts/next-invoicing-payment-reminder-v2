@@ -3,7 +3,6 @@ import { Resend } from 'resend';
 import { db } from '@/lib/db';
 import { InvoiceEmailProps } from '@/lib/interfaces/interfaces';
 import { InvoiceEmail } from '@/components/templates/invoice-email';
-import { cli } from 'cypress';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
