@@ -50,11 +50,8 @@ const TableRows: FC<TableRowsProps> = ({ invoices }) => {
                 </span>
               </Link>
 
-              <div className='p-2 scale-90 flex w-max items-center hover:cursor-pointer  transition-opacity hover:opacity-70'>
-                <DeleteButton invoice={invoice} />
-                <span className='ml-1 text-base text-slate-700'>
-                  Delete Invoice
-                </span>
+              <div className='p-2 scale-90 flex w-max items-center hover:cursor-pointer  transition-opacity'>
+                <DeleteButton invoice={invoice} label='Delete Invoice' />
               </div>
             </MoreDropDown>
           </div>

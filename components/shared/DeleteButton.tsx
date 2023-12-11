@@ -6,9 +6,10 @@ import { Trash2 } from 'react-feather';
 interface DeleteButtonProps {
   item?: { id: string };
   invoice?: { id: string };
+  label?: string;
 }
 
-const DeleteButton: FC<DeleteButtonProps> = ({ item, invoice }) => {
+const DeleteButton: FC<DeleteButtonProps> = ({ item, invoice, label }) => {
   const handleDelete = useCallback(async () => {
     try {
       if (item?.id) {
@@ -30,6 +31,7 @@ const DeleteButton: FC<DeleteButtonProps> = ({ item, invoice }) => {
       onClick={handleDelete}
     >
       <Trash2 className='text-blue-600 w-[1.35rem] h-[1.35rem]' />
+      <span className='ml-1 text-base text-slate-700'>{label}</span>
     </div>
   );
 };
