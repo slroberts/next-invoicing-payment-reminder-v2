@@ -1,6 +1,6 @@
 # next-invoicing-payment-reminder-v2
 
-This Next.js application, tailored for freelancers and small businesses, offers a user-friendly platform for streamlined invoicing and automated payment reminders. Integrated with essential tools like Prisma for database management, SendGrid for email notifications, and Stripe for secure online payments, this app provides a complete solution for efficient invoice management. With intuitive features designed to simplify financial tasks, this Next.js project is the go-to choice for hassle-free invoicing and payment tracking during development and testing phases.
+This Next.js application, tailored for freelancers and small businesses, offers a user-friendly platform for streamlined invoicing and automated payment reminders. Integrated with essential tools like Prisma for database management, Resend for email notifications, and Stripe for secure online payments, this app provides a complete solution for efficient invoice management. With intuitive features designed to simplify financial tasks, this Next.js project is the go-to choice for hassle-free invoicing and payment tracking during development and testing phases.
 
 **It's important to note that, as of now, this application is not set up for production use.
 **
