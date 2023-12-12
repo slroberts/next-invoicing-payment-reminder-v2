@@ -20,9 +20,8 @@ export const ConfirmationEmail: React.FC<Readonly<InvoiceEmailProps>> = ({
       <section>
         <h3>Hello {clientName},</h3>
         <p>
-          Your payment has been successfully processed! Yo will receive a
-          confirmation email shortly. Please review it to ensure that all your
-          transaction details are securely documented.
+          Your payment has been successfully processed, and your transaction is
+          now complete.
         </p>
       </section>
 

@@ -17,10 +17,11 @@ export default function SuccessPage() {
   return (
     <div>
       <h1 className='my-2 font-bold text-2xl text-slate-200'>
-        Payment Successful
+        Thank You for Your Payment! 🌟
       </h1>
       <p className='text-slate-200'>
-        Thank you for your payment, your transaction has been completed.
+        Your payment has been received successfully. Look out for a confirmation
+        email heading your way shortly.
       </p>
 
       <hr className='my-8 border-[.0125rem] border-slate-700' />
