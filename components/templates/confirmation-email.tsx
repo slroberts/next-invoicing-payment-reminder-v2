@@ -19,7 +19,11 @@ export const ConfirmationEmail: React.FC<Readonly<InvoiceEmailProps>> = ({
     <div>
       <section>
         <h3>Hello {clientName},</h3>
-        <p>Here is your payment confirmation.</p>
+        <p>
+          Your payment has been successfully processed! Yo will receive a
+          confirmation email shortly. Please review it to ensure that all your
+          transaction details are securely documented.
+        </p>
       </section>
 
       <section style={{ width: '80%', margin: '0 auto' }}>
@@ -123,10 +127,7 @@ export const ConfirmationEmail: React.FC<Readonly<InvoiceEmailProps>> = ({
                 padding: '10px',
               }}
             >
-              Payment Status:{' '}
-              <span style={{ fontWeight: 700 }}>
-                {paymentStatus === 'PAID' ? 'Paid' : 'Not Paid'}
-              </span>
+              Payment Status: <span style={{ fontWeight: 700 }}>Paid</span>
             </td>
           </tr>
         </table>
