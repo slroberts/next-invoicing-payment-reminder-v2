@@ -62,14 +62,14 @@ const ClientsList: FC<ClientsListProps> = ({ clients }) => {
           <div key={client.id}>
             <div className='float-right mt-4 mr-3'>
               <MoreDropDown modalRef={modalRef}>
-                <div id='new-invoice' className='py-2 scale-90'>
+                <div className='py-2 scale-90'>
                   <NewInvoiceForm
                     client={client}
                     label='New Invoice'
                     modalRef={modalRef}
                   />
                 </div>
-                <div id='edit-client' className='py-2 scale-90'>
+                <div className='py-2 scale-90'>
                   <EditClientForm
                     client={client}
                     label='Edit Client'
@@ -87,7 +87,7 @@ const ClientsList: FC<ClientsListProps> = ({ clients }) => {
               </MoreDropDown>
             </div>
             <div className='px-6 py-4' role='link' tabIndex={0}>
-              <Link href={`/dashboard/client/${client.id}`}>
+              <Link id='delete-client' href={`/dashboard/client/${client.id}`}>
                 <ClientCard client={client} />
               </Link>
             </div>

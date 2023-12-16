@@ -24,7 +24,7 @@ const HeaderLoginLogoutBtn = ({ user }: { user: IUser }) => {
         </div>
       ) : (
         <Link href='/login' className='underline text-slate-500'>
-          <LogIn />
+          <LogIn id='login-btn' />
         </Link>
       )}
     </div>

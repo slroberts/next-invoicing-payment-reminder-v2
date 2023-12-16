@@ -46,7 +46,10 @@ const ConnectToStripe: FC<UserProps> = ({ user }: { user: IUser }) => {
   return (
     <div>
       {user && !userData?.stripeAccountId && (
-        <div className='w-screen bottom-0 left-0 absolute px-4 py-2 overflow-hidden bg-emerald-400 flex flex-wrap justify-center items-center'>
+        <div
+          id='connet-to-stripe'
+          className='w-screen bottom-0 left-0 absolute px-4 py-2 overflow-hidden bg-emerald-400 flex flex-wrap justify-center items-center'
+        >
           <p className='text-center text-sm sm:text-base'>
             Before you can start receiving payments, please connect your account
             to Stripe.

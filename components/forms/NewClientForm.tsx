@@ -89,7 +89,7 @@ const NewClientForm: FC<NewClientFormProps> = () => {
 
   return (
     <>
-      <div className='cursor-pointer' onClick={openModal}>
+      <div id='new-client-btn' className='cursor-pointer' onClick={openModal}>
         <div className='flex gap-2 justify-between items-center'>
           <h2 className='text-white text-lg font-medium'>Add client</h2>
           <div className='text-white'>

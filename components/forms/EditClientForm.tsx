@@ -96,7 +96,11 @@ const EditClientForm: FC<EditClientProps> = ({
 
   return (
     <div>
-      <div className='hover:cursor-pointer' onClick={openModal}>
+      <div
+        id='edit-client'
+        className='hover:cursor-pointer'
+        onClick={openModal}
+      >
         <div className='flex w-max items-center transition-opacity hover:opacity-70'>
           <Edit3 className='w-[1.25rem] h-[1.25rem] text-blue-600' />
           <span className='ml-[.45rem]'>{label}</span>

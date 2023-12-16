@@ -64,6 +64,7 @@ const Button: FC<ButtonProps> = ({
 }) => {
   return (
     <button
+      id='form-btn'
       disabled={disabled}
       onClick={onClick}
       className={buttonClasses({ intent, size, className })}

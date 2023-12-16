@@ -23,6 +23,7 @@ const LogoutButton = () => {
 
   return (
     <div
+      id='logout-button'
       className='flex cursor-pointer text-sm transition-opacity hover:opacity-70'
       onClick={logout}
     >

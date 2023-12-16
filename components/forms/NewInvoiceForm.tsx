@@ -67,7 +67,11 @@ const NewInvoiceForm: FC<NewInvoiceFormProps> = ({
 
   return (
     <div>
-      <div className='hover:cursor-pointer' onClick={openModal}>
+      <div
+        id='new-invoice'
+        className='hover:cursor-pointer'
+        onClick={openModal}
+      >
         <div className='flex w-max items-center transition-opacity hover:opacity-70'>
           <FilePlus className='w-[1.35rem] h-[1.35rem] text-blue-600' />
           <span className={`ml-1 ${className}`}>{label}</span>
