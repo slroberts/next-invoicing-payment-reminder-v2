@@ -1,5 +1,3 @@
-/// <reference types="cypress" />
-
 Cypress.Commands.add('loginAsUser', () => {
   cy.visit('/login');
   cy.get('input[name=email]').type('user@email.com');
