@@ -45,6 +45,6 @@
     "@types/cookie": "^0.5.1",
     "@types/react-modal": "^3.16.0",
     "@types/text-encoding": "^0.0.36",
-    "cypress": "^12.16.0"
+    "cypress": "^13.6.1"
   }
 }
