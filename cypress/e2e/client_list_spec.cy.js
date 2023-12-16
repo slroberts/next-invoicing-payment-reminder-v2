@@ -11,6 +11,7 @@ describe('ClientsList - Add New Client Functionality', () => {
     cy.get('input[name=email]').type('test@company.com');
     cy.get('input[name=phoneNumber]').type('000-000-0000');
     cy.get('#form-btn').click();
+    cy.url().should('include', '/dashboard');
   });
 });
 
@@ -45,10 +46,10 @@ describe('ClientsList - Add New Invoice Functionality', () => {
 
   it('should add new invoice when the new invoice action is triggered', () => {
     cy.get('#more-dropdown').first().click();
-    cy.get('#new-invoice').first().click();
+    cy.get('#new-invoice').click();
     cy.get('input[name=due]').type('2023-12-25');
     cy.get('#form-btn').click();
-    cy.url().should('include', '/dashboard/client/invoice/');
+    cy.url().should('include', '/dashboard/client/invoice');
   });
 });
 
@@ -59,12 +60,16 @@ describe('ClientsList - Edit Client Functionality', () => {
   });
 
   it('should open, edit and submit form correctly when edit client action is triggered', () => {
-    cy.get('#new-client-btn').click();
-    cy.get('input[name=name]').type('New Company');
-    cy.get('input[name=address]').type('456 Street, City, State, 00000');
-    cy.get('input[name=email]').type('new@company.com');
-    cy.get('input[name=phoneNumber]').type('000-000-0000');
+    cy.get('#more-dropdown').first().click();
+    cy.get('#edit-client').click();
+    cy.get('input[name=name]').clear().type('New Company');
+    cy.get('input[name=address]')
+      .clear()
+      .type('456 Street, City, State, 00000');
+    cy.get('input[name=email]').clear().type('new@company.com');
+    cy.get('input[name=phoneNumber]').clear().type('000-000-0000');
     cy.get('#form-btn').click();
+    cy.url().should('include', '/dashboard');
   });
 });
 
@@ -78,7 +83,7 @@ describe('ClientsList - Delete Functionality', () => {
     cy.get('.client-card').then(($clients) => {
       const initialNumberOfClients = $clients.length;
       cy.get('#more-dropdown').first().click();
-      cy.get('#delete-client').first().click();
+      cy.get('#delete-client').click();
       cy.get('.client-card').should('have.length', initialNumberOfClients - 1);
     });
   });
